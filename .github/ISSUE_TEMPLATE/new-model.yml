@@ -1,0 +1,88 @@
+name: New Model Submission
+description: Submit a new generative AI model (image, video, or multimodal) to modeldrop.fyi
+title: "[New Model] "
+labels: ["new-model", "pending-review"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Model Name
+      description: The exact name of the model (e.g., FLUX.1, Stable Diffusion 3)
+      placeholder: FLUX.1
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Author / Organization
+      description: Who released the model
+      placeholder: Black Forest Labs
+    validations:
+      required: true
+
+  - type: input
+    id: release_date
+    attributes:
+      label: Release Date
+      description: When the model was publicly released
+      placeholder: "2024-07-31"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Model Type
+      multiple: false
+      options:
+        - image
+        - video
+        - multimodal
+    validations:
+      required: true
+
+  - type: dropdown
+    id: open_source
+    attributes:
+      label: Open Source
+      multiple: false
+      options:
+        - "true"
+        - "false"
+    validations:
+      required: true
+
+  - type: input
+    id: parameters
+    attributes:
+      label: Parameters
+      description: Size of the model (e.g., 12B, 8B, unknown)
+      placeholder: 12B
+
+  - type: textarea
+    id: links
+    attributes:
+      label: Important Links
+      description: One link per line. Include Hugging Face, official announcement, paper, etc.
+      placeholder: |
+        https://huggingface.co/black-forest-labs/FLUX.1
+        https://blackforestlabs.ai/blog/flux-1
+        https://arxiv.org/abs/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated keywords that describe the model (e.g., text-to-image, diffusion, high-resolution)
+      placeholder: text-to-image, diffusion, high-resolution
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description / Notes
+      description: Overview, key features, usage notes, benchmarks, or anything else useful. Full Markdown supported.
+      placeholder: |
+        A brief overview of the model...
