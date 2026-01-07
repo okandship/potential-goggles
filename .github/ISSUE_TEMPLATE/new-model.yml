@@ -65,7 +65,7 @@ body:
       label: variants
       description: one per line
       placeholder: e.g. Flash
-      | Image
+        | Image
     validations:
       required: false
 
