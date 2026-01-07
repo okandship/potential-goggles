@@ -1,5 +1,5 @@
-name: Model Submission
-description: Submit a new model entry
+name: model submission
+description: submit a new model entry
 title: "[model]: "
 labels: ["model-entry"]
 body:
