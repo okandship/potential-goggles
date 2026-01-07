@@ -76,6 +76,7 @@ body:
     attributes:
       label: aka
       description: list of additional names the model is known for, one per line
+      render: aaa
     validations:
       required: false
 
