@@ -6,13 +6,13 @@ google/gemini-2-5-flash-image
 
 Google
 
-### nickname
-
-Nano Banana
-
 ### name
 
 Gemini 2.5 Flash Image
+
+### nickname
+
+Nano Banana
 
 ### family
 
