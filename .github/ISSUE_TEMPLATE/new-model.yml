@@ -95,7 +95,7 @@ body:
       label: is preview release?
       description: is this a beta or preview version?
       options:
-        - label: yes
+        - label: aaa
     validations:
       required: true
 
