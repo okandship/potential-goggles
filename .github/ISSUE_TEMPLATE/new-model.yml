@@ -62,7 +62,7 @@ body:
   - type: textarea
     id: variant
     attributes:
-      label: variants
+      label: variant
       description: one per line
       placeholder: |
         e.g. Flash
@@ -93,10 +93,9 @@ body:
   - type: checkboxes
     id: is_preview_release
     attributes:
-      label: is preview release?
-      description: is this a beta or preview version?
+      label: is preview release
       options:
-        - label: aaa
+        - label: "yes"
     validations:
       required: true
 
@@ -104,8 +103,8 @@ body:
   - type: input
     id: base_model
     attributes:
-      label: base model id
-      description: the id of the base model if applicable
+      label: base model
+      description: modeldrop model id of the base model
       placeholder: e.g. black-forest-labs/flux-2-dev
     validations:
       required: false
