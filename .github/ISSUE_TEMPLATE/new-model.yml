@@ -64,13 +64,12 @@ body:
     attributes:
       label: variants
       description: one per line
-      placeholder: e.g. Flash
-        | Image
+      placeholder: e.g. Flash\nImage
     validations:
       required: false
 
   # aka: z.array(z.string()).optional()
-  - type: input
+  - type: textarea
     id: aka
     attributes:
       label: aka
