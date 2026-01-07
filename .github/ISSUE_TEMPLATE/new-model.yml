@@ -1,12 +1,12 @@
 name: Model Submission
 description: Submit a new model entry
-title: "[Model]: "
+title: "[model]: "
 labels: ["model-entry"]
 body:
   - type: markdown
     attributes:
       value: |
-        please fill out the details for the new model below.
+        please fill out the details for the new model below
 
   # creator: creatorEnum
   - type: dropdown
