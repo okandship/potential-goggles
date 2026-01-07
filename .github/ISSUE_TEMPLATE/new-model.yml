@@ -89,13 +89,15 @@ body:
     validations:
       required: true
 
-  # "is preview release": z.stringbool().or(z.boolean())
-  - type: checkboxes
+# "is preview release": z.stringbool().or(z.boolean())
+  - type: dropdown
     id: is_preview_release
     attributes:
       label: is preview release
+      description: is this a beta or preview version?
       options:
-        - label: "yes"
+        - "no"
+        - "yes"
     validations:
       required: true
 
