@@ -1,3 +1,7 @@
+### id
+
+google/gemini-2-5-flash-image
+
 ### creator
 
 Google
@@ -25,12 +29,8 @@ Gemini
 
 ### release date
 
-Thu Oct 02 2025 02:00:00 GMT+0200 (Central European Summer Time)
+2025-10-02
 
 ### is preview release
 
 false
-
-### id
-
-google/gemini-2-5-flash-image
