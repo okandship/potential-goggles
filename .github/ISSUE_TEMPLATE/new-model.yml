@@ -6,14 +6,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        Please fill out the details for the new model below.
+        please fill out the details for the new model below.
 
   # creator: creatorEnum
   - type: dropdown
     id: creator
     attributes:
-      label: Creator
-      description: Select the organization that created the model.
+      label: creator
+      description: who created the model
       options:
         - Google
         - Black Forest Labs
@@ -25,9 +25,9 @@ body:
   - type: input
     id: name
     attributes:
-      label: Name
-      description: The official name of the model.
-      placeholder: e.g. Flux Pro
+      label: name
+      description: full model name
+      placeholder: e.g. Gemini 2.5 Flash Image
     validations:
       required: true
 
@@ -35,8 +35,9 @@ body:
   - type: input
     id: nickname
     attributes:
-      label: Nickname
-      description: (Optional) A common nickname or alias.
+      label: nickname
+      description: the unofficial name the model is known for
+      placeholder: e.g. Nano Banana
     validations:
       required: false
 
@@ -44,9 +45,8 @@ body:
   - type: input
     id: family
     attributes:
-      label: Family
-      description: The model family this belongs to.
-      placeholder: e.g. Flux, Gemini, etc.
+      label: family
+      placeholder: e.g. Gemini
     validations:
       required: true
 
@@ -54,9 +54,8 @@ body:
   - type: input
     id: version
     attributes:
-      label: Version
-      description: (Optional) The specific version string.
-      placeholder: e.g. v1.0, 1.5
+      label: version
+      placeholder: e.g. 2.5
     validations:
       required: false
 
@@ -64,7 +63,7 @@ body:
   - type: textarea
     id: variant
     attributes:
-      label: Variants
+      label: variants
       description: (Optional) Comma-separated list of variants.
       placeholder: e.g. fp16, quantized, diffusers
     validations:
@@ -83,22 +82,20 @@ body:
   - type: input
     id: release_date
     attributes:
-      label: Release Date
-      description: Date of release in YYYY-MM-DD format.
+      label: release date
+      description: official date of release in YYYY-MM-DD format
       placeholder: YYYY-MM-DD
     validations:
       required: true
 
   # "is preview release": z.stringbool().or(z.boolean())
-  - type: dropdown
+  - type: checkboxes
     id: is_preview_release
     attributes:
-      label: Is Preview Release?
-      description: Is this a beta or preview version?
+      label: is preview release?
+      description: is this a beta or preview version?
       options:
-        - "false"
-        - "true"
-      default: 0
+        - label: yes
     validations:
       required: true
 
@@ -106,7 +103,8 @@ body:
   - type: input
     id: base_model
     attributes:
-      label: Base Model ID
-      description: (Optional) The ID of the base model if applicable.
+      label: base model id
+      description: the id of the base model if applicable
+      placeholder: e.g. black-forest-labs/flux-2-dev
     validations:
       required: false
