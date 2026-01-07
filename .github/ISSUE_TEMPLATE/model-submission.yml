@@ -20,16 +20,6 @@ body:
     validations:
       required: true
 
-  # name: z.string()
-  - type: input
-    id: name
-    attributes:
-      label: name
-      description: full model name
-      placeholder: e.g. Gemini 2.5 Flash Image
-    validations:
-      required: true
-
   # nickname: z.string().optional()
   - type: input
     id: nickname
@@ -39,6 +29,16 @@ body:
       placeholder: e.g. Nano Banana
     validations:
       required: false
+
+  # name: z.string()
+  - type: input
+    id: name
+    attributes:
+      label: name
+      description: full model name
+      placeholder: e.g. Gemini 2.5 Flash Image
+    validations:
+      required: true
 
   # family: z.string()
   - type: input
