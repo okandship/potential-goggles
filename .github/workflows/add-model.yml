@@ -70,12 +70,12 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "add model ${{ steps.process.outputs.model-name }}"
-          title: "add model ${{ steps.process.outputs.model-name }}"
+          title: "add model `${{ steps.process.outputs.model-name }}`"
           branch: ${{ steps.process.outputs.branch-name }}
           base: main
           delete-branch: true
           body: |
-            ### 🍱 modeldrop
+            ### 🍱 modeldrop!
 
             - **id** `${{ steps.process.outputs.model-id }}`
             - **name** ${{ steps.process.outputs.model-name }}
@@ -92,7 +92,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `🧞 **modeldrop initiated!**\n\npr created: ${process.env.PR_URL}`
+              body: `🧞 **modeldrop spawned!**\n\npr created: ${process.env.PR_URL}`
             })
 
       - name: comment failure
