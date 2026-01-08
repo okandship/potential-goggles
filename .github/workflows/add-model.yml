@@ -75,7 +75,7 @@ jobs:
           base: main
           delete-branch: true
           body: |
-            ### modeldrop 📦
+            ### 🍱 modeldrop
 
             - **id** `${{ steps.process.outputs.model-id }}`
             - **name** ${{ steps.process.outputs.model-name }}
@@ -92,7 +92,7 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `🚀 **modeldrop initiated!**\n\npr created: ${process.env.PR_URL}`
+              body: `🧞 **modeldrop initiated!**\n\npr created: ${process.env.PR_URL}`
             })
 
       - name: comment failure
@@ -104,5 +104,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `❌ **modeldrop failed**\n\ncheck the logs: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+              body: `🍂 **modeldrop failed**\n\ncheck the logs: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
             })
