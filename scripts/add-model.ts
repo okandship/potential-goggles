@@ -16,17 +16,17 @@ if (!(model.id && model.name)) {
   process.exit(1);
 }
 
-const outputMarkdown = dataObjectToMarkdown(model, ModelCoreSchema);
+const modelSlug = createModelSlug(model.id);
+const modelPath = `models/${modelSlug}.md`;
 
-const modelPath = `models/${model.id}.md`;
-
-const modelFile = Bun.file(modelPath);
-if (await modelFile.exists()) {
+if (await Bun.file(modelPath).exists()) {
   console.error(
     `::error::duplicate model detected: ${modelPath} already exists`
   );
   process.exit(1);
 }
+
+const outputMarkdown = dataObjectToMarkdown(model, ModelCoreSchema);
 
 await Bun.write(modelPath, outputMarkdown);
 console.log(`successfully created ${modelPath}`);
@@ -41,7 +41,7 @@ if (!outputsPath) {
 appendFileSync(
   outputsPath,
   Object.entries({
-    "branch-name": `add-model/${createModelSlug(model.creator, model.name)}`,
+    "branch-name": `add-model/${modelSlug}`,
     "model-id": model.id,
     "model-name": model.name,
   })

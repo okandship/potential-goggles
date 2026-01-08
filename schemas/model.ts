@@ -45,8 +45,8 @@ function createModelId(creator: string, name: string) {
   return `${slugifyPart(creator)}/${slugifyPart(name)}`;
 }
 
-export function createModelSlug(creator: string, name: string) {
-  return slugify(createModelId(creator, name));
+export function createModelSlug(modelId: string) {
+  return slugify(modelId);
 }
 
 export const ModelCoreSchema = z
