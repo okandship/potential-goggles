@@ -8,6 +8,21 @@ body:
       value: |
         please fill out the details for the new model below
 
+  # "main modality": z.array(modalityEnum)
+  - type: dropdown
+    id: main-modality
+    attributes:
+      label: main modality
+      description: allows multiple
+      options:
+        - image
+        - video
+        - audio
+        - 3d
+      multiple: true
+    validations:
+      required: true
+
   # creator: creatorEnum
   - type: dropdown
     id: creator
@@ -81,7 +96,7 @@ body:
 
   # "release date": z.coerce.date()
   - type: input
-    id: release_date
+    id: release-date
     attributes:
       label: release date
       description: official date of release in YYYY-MM-DD format
@@ -91,7 +106,7 @@ body:
 
 # "is preview release": z.stringbool().or(z.boolean())
   - type: dropdown
-    id: is_preview_release
+    id: is-preview-release
     attributes:
       label: is preview release
       description: is this a beta or preview version?
@@ -103,7 +118,7 @@ body:
 
   # "base model": modelIdString.optional()
   - type: input
-    id: base_model
+    id: base-model
     attributes:
       label: base model
       description: modeldrop model id of the base model
