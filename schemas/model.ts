@@ -1,11 +1,11 @@
 import slugify from "@sindresorhus/slugify";
 import { z } from "zod";
 
-const availabilityEnum = z.enum(["full", "partial", "none"]);
-const creatorEnum = z.enum(["Google", "Black Forest Labs", "fal"]);
-const modalityEnum = z.enum(["text", "image", "video", "audio", "3d", "pdf"]);
-const accessTypeEnum = z.enum(["api", "web app", "discord", "local"]);
-const capabilityTypeEnum = z.enum([
+const AvailabilityEnum = z.enum(["full", "partial", "none"]);
+const CreatorEnum = z.enum(["Google", "Black Forest Labs", "fal"]);
+const ModalityEnum = z.enum(["text", "image", "video", "audio", "3d", "pdf"]);
+const AccessTypeEnum = z.enum(["api", "web app", "discord", "local"]);
+const CapabilityTypeEnum = z.enum([
   "image reference",
   "video reference",
   "editing",
@@ -34,27 +34,28 @@ const capabilityTypeEnum = z.enum([
   "lora",
 ]);
 // format: <creator>/<name>
-const modelIdString = z.stringFormat(
+const ModelIdString = z.stringFormat(
   "model id",
   /^[a-z0-9._-]+\/[a-z0-9._-]+$/
 );
 
-function createModelId(
-  creator: string,
-  name: string
-): z.output<typeof modelIdString> {
+function createModelId(creator: string, name: string) {
   const slugifyPart = (str: string) =>
     slugify(str, { preserveCharacters: ["_", "."] });
   return `${slugifyPart(creator)}/${slugifyPart(name)}`;
 }
 
+export function createModelSlug(creator: string, name: string) {
+  return slugify(createModelId(creator, name));
+}
+
 export const ModelCoreSchema = z
   .object({
-    id: modelIdString.optional(),
+    id: ModelIdString.optional(),
 
-    "main modality": z.array(modalityEnum),
+    "main modality": z.array(ModalityEnum),
 
-    creator: creatorEnum,
+    creator: CreatorEnum,
     name: z.string(),
     nickname: z.string().optional(),
     family: z.string(),
@@ -65,8 +66,8 @@ export const ModelCoreSchema = z
     "release date": z.iso.date(),
     "is preview release": z.stringbool().or(z.boolean()),
 
-    "base model": modelIdString.optional(),
-    "new version": modelIdString.optional(),
+    "base model": ModelIdString.optional(),
+    "new version": ModelIdString.optional(),
   })
   .overwrite((data) => ({
     ...data,
@@ -74,9 +75,9 @@ export const ModelCoreSchema = z
   }));
 
 export const ModelExtendedSchema = z.object({
-  "access type": z.array(accessTypeEnum),
-  capabilities: z.array(capabilityTypeEnum),
-  "nsfw level": availabilityEnum,
+  "access type": z.array(AccessTypeEnum),
+  capabilities: z.array(CapabilityTypeEnum),
+  "nsfw level": AvailabilityEnum,
   "knowledge cutoff": z.date(),
 });
 
@@ -84,11 +85,11 @@ export const ModelLicenseSchema = z.object({
   license: z.string(),
   "commercial use allowed": z.stringbool().or(z.boolean()),
 
-  "weights available": availabilityEnum,
-  "inference code available": availabilityEnum,
-  "training code available": availabilityEnum,
-  "training data available": availabilityEnum,
-  "architecture disclosed": availabilityEnum,
+  "weights available": AvailabilityEnum,
+  "inference code available": AvailabilityEnum,
+  "training code available": AvailabilityEnum,
+  "training data available": AvailabilityEnum,
+  "architecture disclosed": AvailabilityEnum,
 });
 
 export const ModelLinksSchema = z.object({
@@ -108,8 +109,8 @@ export const ModelDescriptionSchema = z.object({
 });
 
 export const ModelIOSchema = z.object({
-  "modalities (input)": z.array(modalityEnum),
-  "modalities (output)": z.array(modalityEnum),
+  "modalities (input)": z.array(ModalityEnum),
+  "modalities (output)": z.array(ModalityEnum),
 
   "min tokens (input)": z.number(),
   "max tokens (input)": z.number(),

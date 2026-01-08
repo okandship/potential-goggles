@@ -1,43 +1,50 @@
 import { appendFileSync } from "node:fs";
 import { dataObjectToMarkdown, markdownToDataObject } from "@okandship/h3kv";
-import type { z } from "zod";
-import { ModelCoreSchema } from "../schemas/model";
+import { createModelSlug, ModelCoreSchema } from "../schemas/model";
 
-const issueBody = Bun.env.ISSUE_BODY;
+const inputMarkdown = Bun.env.ISSUE_BODY;
 
-if (!issueBody) {
-  console.error("::error::No ISSUE_BODY provided.");
+if (!inputMarkdown) {
+  console.error("::error::no ISSUE_BODY provided");
   process.exit(1);
 }
 
-let dataObject: z.output<typeof ModelCoreSchema>;
-try {
-  dataObject = markdownToDataObject(issueBody, ModelCoreSchema);
-} catch (err) {
-  console.error("::error::Form validation failed.", err);
+const model = markdownToDataObject(inputMarkdown, ModelCoreSchema);
+
+if (!(model.id && model.name)) {
+  console.error("::error::missing model id or name");
   process.exit(1);
 }
 
-if (!dataObject.id) {
-  console.error("::error::Missing 'id' in form data.");
+const outputMarkdown = dataObjectToMarkdown(model, ModelCoreSchema);
+
+const modelPath = `models/${model.id}.md`;
+
+const modelFile = Bun.file(modelPath);
+if (await modelFile.exists()) {
+  console.error(
+    `::error::duplicate model detected: ${modelPath} already exists`
+  );
   process.exit(1);
 }
 
-const outputMarkdown = dataObjectToMarkdown(dataObject, ModelCoreSchema);
+await Bun.write(modelPath, outputMarkdown);
+console.log(`successfully created ${modelPath}`);
 
-const filePath = `models/${dataObject.id}.md`;
+const outputsPath = Bun.env.GITHUB_OUTPUT;
 
-const file = Bun.file(filePath);
-if (await file.exists()) {
-  console.error(`::error::Duplicate detected: ${filePath} already exists.`);
+if (!outputsPath) {
+  console.error("::error::no GITHUB_OUTPUT provided");
   process.exit(1);
 }
 
-await Bun.write(filePath, outputMarkdown);
-console.log(`Successfully created ${filePath}`);
-
-const githubOutputPath = Bun.env.GITHUB_OUTPUT;
-if (githubOutputPath) {
-  const outputs = `model-id=${dataObject.id}\nmodel-name=${dataObject.name}\n`;
-  appendFileSync(githubOutputPath, outputs);
-}
+appendFileSync(
+  outputsPath,
+  Object.entries({
+    "branch-name": createModelSlug(model.creator, model.name),
+    "model-id": model.id,
+    "model-name": model.name,
+  })
+    .map(([key, value]) => `${key}=${value}`)
+    .join("\n")
+);
