@@ -1,0 +1,64 @@
+name: add model
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  create-model-pr:
+    if: "github.event.label.name == 'status: approved'"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Security: Verify the person who added the label is actually a maintainer
+      # context.actor in a 'labeled' event is the person who added the label
+      - name: Check Permissions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: perm } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.actor
+            });
+            
+            if (!['admin', 'maintainer', 'write'].includes(perm.permission)) {
+              core.setFailed(`User @${context.actor} is not authorized to approve models.`);
+            }
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Generate Model File
+        id: process
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: bun run scripts/add-model.ts
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "add model ${{ steps.process.outputs.model-name }}"
+          title: "add model ${{ steps.process.outputs.model-name }}"
+          branch: "add-model-${{ steps.process.outputs.model-id }}"
+          base: main
+          delete-branch: true
+          body: |
+            **Model Drop** 📦
+            
+            - **ID:** `${{ steps.process.outputs.model-id }}`
+            - **Model:** ${{ steps.process.outputs.model-name }}
+            - **Submitted by:** @${{ github.event.issue.user.login }}

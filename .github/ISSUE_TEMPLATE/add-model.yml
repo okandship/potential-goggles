@@ -1,4 +1,4 @@
-name: model submission
+name: add model
 description: submit a new model entry
 labels: ["model-entry"]
 body:
