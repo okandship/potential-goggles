@@ -41,7 +41,7 @@ if (!outputsPath) {
 appendFileSync(
   outputsPath,
   Object.entries({
-    "branch-name": createModelSlug(model.creator, model.name),
+    "branch-name": `add-model/${createModelSlug(model.creator, model.name)}`,
     "model-id": model.id,
     "model-name": model.name,
   })

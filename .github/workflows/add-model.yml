@@ -79,3 +79,29 @@ jobs:
             - **id** `${{ steps.process.outputs.model-id }}`
             - **name** ${{ steps.process.outputs.model-name }}
             - **submitted by** @${{ github.event.issue.user.login }}
+
+      - name: comment success
+        if: success()
+        uses: actions/github-script@v8
+        env:
+          PR_URL: ${{ steps.cpr.outputs.pull-request-url }}
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `🚀 **modeldrop initiated!**\n\npr created: ${process.env.PR_URL}`
+            })
+
+      - name: comment failure
+        if: failure()
+        uses: actions/github-script@v8
+        with:
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `❌ **modeldrop failed**\n\ncheck the logs: ${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+            })
