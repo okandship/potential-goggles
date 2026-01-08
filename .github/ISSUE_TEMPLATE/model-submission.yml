@@ -7,17 +7,17 @@ body:
       value: |
         | Attribute | Value |
         | --- | --- |
-        | **main modality** | image |
+        | `main modality` | image |
         | **creator** | Google |
         | **name** | Gemini 2.5 Flash Image |
         | **nickname** | Nano Banana |
         | **family** | Gemini |
         | **version** | 2.5 |
         | **variant** | Flash<br>Image |
-        | **aka** | *No response* |
+        | **aka** | _No response_ |
         | **release date** | 2025-10-02 |
         | **is preview release** | no |
-        | **base model** | *No response* |
+        | **base model** | _No response_ |
 
   # "main modality": z.array(modalityEnum)
   - type: dropdown
