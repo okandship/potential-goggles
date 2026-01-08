@@ -5,6 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
+        # example
+        
         | | |
         | --- | --- |
         | `main modality` | image |
@@ -18,6 +20,8 @@ body:
         | `release date` | 2025-10-02 |
         | `is preview release` | no |
         | `base model` | _No response_ |
+
+        # your turn
 
   # "main modality": z.array(modalityEnum)
   - type: dropdown
