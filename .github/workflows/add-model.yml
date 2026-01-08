@@ -5,7 +5,7 @@ on:
     types: [closed]
 
 jobs:
-  create-model-pr:
+  add-model:
     if: "github.event.issue.state_reason == 'completed' && contains(github.event.issue.labels.*.name, 'model-entry')"
     runs-on: ubuntu-latest
     permissions:
