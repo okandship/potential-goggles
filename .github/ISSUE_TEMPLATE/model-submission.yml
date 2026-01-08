@@ -5,52 +5,52 @@ body:
   - type: markdown
     attributes:
       value: |
-# example
-   
-### main modality
-
-image
-
-### creator
-
-Google
-
-### name
-
-Gemini 2.5 Flash Image
-
-### nickname
-
-Nano Banana
-
-### family
-
-Gemini
-
-### version
-
-2.5
-
-### variant
-
-Flash
-Image
-
-### aka
-
-_No response_
-
-### release date
-
-2025-10-02
-
-### is preview release
-
-no
-
-### base model
-
-_No response_
+        # example
+           
+        ### main modality
+        
+        image
+        
+        ### creator
+        
+        Google
+        
+        ### name
+        
+        Gemini 2.5 Flash Image
+        
+        ### nickname
+        
+        Nano Banana
+        
+        ### family
+        
+        Gemini
+        
+        ### version
+        
+        2.5
+        
+        ### variant
+        
+        Flash
+        Image
+        
+        ### aka
+        
+        _No response_
+        
+        ### release date
+        
+        2025-10-02
+        
+        ### is preview release
+        
+        no
+        
+        ### base model
+        
+        _No response_
 
   # "main modality": z.array(modalityEnum)
   - type: dropdown
