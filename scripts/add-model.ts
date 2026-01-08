@@ -1,6 +1,6 @@
 import { appendFileSync } from "node:fs";
 import { dataObjectToMarkdown, markdownToDataObject } from "@okandship/h3kv";
-import { createModelSlug, ModelCoreSchema } from "../schemas/model";
+import { ModelCoreSchema } from "../schemas/model";
 
 const inputMarkdown = Bun.env.ISSUE_BODY;
 
@@ -16,8 +16,7 @@ if (!(model.id && model.name)) {
   process.exit(1);
 }
 
-const modelSlug = createModelSlug(model.id);
-const modelPath = `models/${modelSlug}.md`;
+const modelPath = `models/${model.id}.md`;
 
 if (await Bun.file(modelPath).exists()) {
   console.error(
@@ -41,7 +40,7 @@ if (!outputsPath) {
 appendFileSync(
   outputsPath,
   Object.entries({
-    "branch-name": `add-model/${modelSlug}`,
+    "branch-name": `add-model/${model.id}`,
     "model-id": model.id,
     "model-name": model.name,
   })

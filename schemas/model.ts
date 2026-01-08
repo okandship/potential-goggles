@@ -33,20 +33,11 @@ const CapabilityTypeEnum = z.enum([
   "streaming results",
   "lora",
 ]);
-// format: <creator>/<name>
-const ModelIdString = z.stringFormat(
-  "model id",
-  /^[a-z0-9._-]+\/[a-z0-9._-]+$/
-);
+// format: <creator>.<name>
+const ModelIdString = z.stringFormat("model id", /^[a-z0-9_-]+\.[a-z0-9._-]+$/);
 
-function createModelId(creator: string, name: string) {
-  const slugifyPart = (str: string) =>
-    slugify(str, { preserveCharacters: ["_", "."] });
-  return `${slugifyPart(creator)}/${slugifyPart(name)}`;
-}
-
-export function createModelSlug(modelId: string) {
-  return slugify(modelId);
+export function createModelId(creator: string, name: string) {
+  return `${slugify(creator, { preserveCharacters: ["_"] })}.${slugify(name, { preserveCharacters: [".", "_"] })}`;
 }
 
 export const ModelCoreSchema = z
