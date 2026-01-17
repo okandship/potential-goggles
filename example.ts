@@ -5,6 +5,10 @@ const markdown = `### main modality
 
 image
 
+### size
+
+medium
+
 ### creator
 
 Google

@@ -2,13 +2,15 @@ import slugify from "@sindresorhus/slugify";
 import { z } from "zod";
 
 const AvailabilityEnum = z.enum(["full", "partial", "none"]);
+const SizeEnum = z.enum(["small", "medium", "large"]);
 const CreatorEnum = z.enum(["Google", "Black Forest Labs", "fal"]);
 const ModalityEnum = z.enum(["text", "image", "video", "audio", "3d", "pdf"]);
 const AccessTypeEnum = z.enum(["api", "web app", "discord", "local"]);
 const CapabilityTypeEnum = z.enum([
   "image reference",
   "video reference",
-  "editing",
+  "image editing",
+  "video editing",
   "first frame animation",
   "first-last frame interpolation",
   "audio generation from video",
@@ -22,9 +24,11 @@ const CapabilityTypeEnum = z.enum([
   "true transparency",
   "multi-image sequence generation",
   "negative prompt",
-  "color reference",
-  "gps coordinates reference",
-  "style transfering",
+  "color codes understanding",
+  "gps coordinates understanding",
+  "style reference",
+  "content reference",
+  "character reference",
   "prompt rewriter",
   "video extension",
   "safety checker",
@@ -45,6 +49,7 @@ export const ModelCoreSchema = z
     id: ModelIdString.optional(),
 
     "main modality": z.array(ModalityEnum),
+    size: SizeEnum,
 
     creator: CreatorEnum,
     name: z.string(),

@@ -6,10 +6,11 @@ body:
     attributes:
       value: |
         # like this
-        
+
         | | |
         | --- | --- |
         | `main modality` | image |
+        | `size` | medium |
         | `creator` | Google |
         | `name` | Gemini 2.5 Flash Image |
         | `nickname` | Nano Banana |
@@ -23,7 +24,7 @@ body:
 
         # your turn
 
-  # "main modality": z.array(modalityEnum)
+  # "main modality": z.array(ModalityEnum)
   - type: dropdown
     id: main-modality
     attributes:
@@ -38,7 +39,19 @@ body:
     validations:
       required: true
 
-  # creator: creatorEnum
+  # "size": SizeEnum
+  - type: dropdown
+    id: size
+    attributes:
+      label: size
+      options:
+        - small
+        - medium
+        - large
+    validations:
+      required: true
+
+  # creator: CreatorEnum
   - type: dropdown
     id: creator
     attributes:
@@ -119,7 +132,7 @@ body:
     validations:
       required: true
 
-# "is preview release": z.stringbool().or(z.boolean())
+  # "is preview release": z.stringbool().or(z.boolean())
   - type: dropdown
     id: is-preview-release
     attributes:
@@ -131,7 +144,7 @@ body:
     validations:
       required: true
 
-  # "base model": modelIdString.optional()
+  # "base model": ModelIdString.optional()
   - type: input
     id: base-model
     attributes:

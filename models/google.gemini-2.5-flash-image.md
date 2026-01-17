@@ -6,6 +6,10 @@ google.gemini-2.5-flash-image
 
 - image
 
+### size
+
+medium
+
 ### creator
 
 Google
