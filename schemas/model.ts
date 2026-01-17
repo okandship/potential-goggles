@@ -2,7 +2,7 @@ import slugify from "@sindresorhus/slugify";
 import { z } from "zod";
 
 const AvailabilityEnum = z.enum(["full", "partial", "none"]);
-const SizeEnum = z.enum(["small", "medium", "large"]);
+const EditionEnum = z.enum(["nano", "standard", "max"]);
 const CreatorEnum = z.enum(["Google", "Black Forest Labs", "fal"]);
 const ModalityEnum = z.enum(["text", "image", "video", "audio", "3d", "pdf"]);
 const AccessTypeEnum = z.enum(["api", "web app", "discord", "local"]);
@@ -49,7 +49,7 @@ export const ModelCoreSchema = z
     id: ModelIdString.optional(),
 
     "main modality": z.array(ModalityEnum),
-    size: SizeEnum,
+    edition: EditionEnum,
 
     creator: CreatorEnum,
     name: z.string(),

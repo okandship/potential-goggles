@@ -7,7 +7,7 @@ Your goal is to generate two distinct visual attributes ("Item" and "Material") 
 
 ### 2. Input Parameters
 You will receive:
-* **Size:** `small` (Nano/Fast), `medium` (Standard), or `large` (Pro/Ultra).
+* **Size:** `nano` (Small), `standard` (Medium), or `max` (Large).
 * **Modality:** `image`, `video`, or `audio`.
 
 ### 3. Output Logic

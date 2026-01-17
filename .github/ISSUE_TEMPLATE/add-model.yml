@@ -10,7 +10,7 @@ body:
         | | |
         | --- | --- |
         | `main modality` | image |
-        | `size` | medium |
+        | `edition` | standard |
         | `creator` | Google |
         | `name` | Gemini 2.5 Flash Image |
         | `nickname` | Nano Banana |
@@ -39,15 +39,15 @@ body:
     validations:
       required: true
 
-  # "size": SizeEnum
+  # "edition": EditionEnum
   - type: dropdown
-    id: size
+    id: edition
     attributes:
-      label: size
+      label: edition
       options:
-        - small
-        - medium
-        - large
+        - standard
+        - nano
+        - max
     validations:
       required: true
 

@@ -5,9 +5,9 @@ const markdown = `### main modality
 
 image
 
-### size
+### edition
 
-medium
+standard
 
 ### creator
 
