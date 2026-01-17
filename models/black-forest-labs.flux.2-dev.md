@@ -6,9 +6,9 @@ black-forest-labs.flux.2-dev
 
 - image
 
-### size
+### edition
 
-small
+standard
 
 ### creator
 
